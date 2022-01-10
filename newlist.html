@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="port">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<head>
+	<title>">NEW LIST</title>
+</head>
+<style>
+	.box{
+		border: 1px solid #000;
+		position: absolute;
+		top: 25%;
+		left: 25%;
+		width: 50%;
+
+	}
+</style>
+<body>
+	<h5 class="text-center">
+		<a class="btn-tarefa" href="javascript:;">CRIANDO ITENS NO LOCAL localStorage</a>
+	</h5>
+<div class="box">
+	<div>
+		<h2 class="text-center alert-primary">PRODUTOS</h2>
+	</div>
+	<div>
+<ul id="lista" contenteditable="false">
+		<li></li>
+	</ul>
+	<div class="text-center pb-5">
+	<button id="bt-criar" class="btn btn-warning text-white me-4">Criar</button>
+	<button id="bt-limpar" class="btn btn-warning text-white me-4">Limpar</button>
+	<button id="btfechar" class="fechar btn btn-secondary text-white ">Fechar</button>
+</div>
+</div>
+</div>
+<!-- <div id="Preço" contenteditable="false">
+    <li>
+
+	</li>
+</ul>
+<div class="text-center pb-1"></div> -->
+
+</div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<script>
+		$('#btfechar').click(function(){
+			$('.box').fadeToggle();
+		});
+	</script>
+	
+<script>
+
+	// jQuery
+	$(".btn-tarefa").click(function(){
+		$(".box").fadeToggle();
+	})
+
+	//CRIAR LISTA
+
+	$("#bt-criar").click(function(){
+		$("#lista").attr("contenteditable",true);
+		$("#lista").focus();
+		$(this).html("SALVAR");
+
+		//salvar
+		if($(this).html() == "SALVAR"){
+			var conteudoLista=$("#lista").html();
+			console.log(conteudoLista);
+			localStorage.conteudoLista=conteudoLista;
+		}
+	})
+	$("#bt-limpar").click(function(){
+		localStorage.removeItem("conteudoLista");
+		$("#lista").html("")
+	})
+	$().ready(function(){
+		if(localStorage.conteudoLista){
+			$("#lista").html(localStorage.conteudoLista);
+			$("bt-criar").html("Editar");
+		}
+	})
+</script>
